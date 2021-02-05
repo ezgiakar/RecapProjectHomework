@@ -12,6 +12,5 @@ namespace Entity.Concrete
         [Key]
         public int CarBrandID { get; set; }
         public string CarBrandName { get; set; }
-        public int MyProperty { get; set; }
     }
 }

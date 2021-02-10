@@ -1,5 +1,6 @@
 ﻿using DataAccess.Abstract;
 using Entity.Concrete;
+using Entity.DTOes;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -37,6 +38,27 @@ namespace DataAccess.Concrete.EntityFramework
             {
                 return filter == null ? context.Set<Car>().ToList()
                                       : context.Set<Car>().Where(filter).ToList();
+            }
+        }
+
+        public List<CarDetailDto> GetCarDetailDtos()
+        {
+            using (NorthwindContext context = new NorthwindContext())
+            {
+                var result = from c in context.Cars
+                             join b in context.Brands
+                             on c.CarBrandID equals b.CarBrandID
+                             join cl in context.Colors
+                             on c.CarColorID equals cl.ColorID
+                             select new CarDetailDto
+                             {
+                                 BrandName = b.CarBrandName,
+                                 ColorName = cl.ColorName,
+                                 DailyPrice = c.CarDailyPrice,
+                                 CarName = c.CarDescription
+                             };
+                return result.ToList();
+
             }
         }
 

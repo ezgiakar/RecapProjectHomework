@@ -2,6 +2,7 @@
 using Business.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
+using Entity.Concrete;
 
 namespace ConsoleUI
 {
@@ -95,6 +96,28 @@ namespace ConsoleUI
             {
                 Console.WriteLine(car.CarName + "/" + car.BrandName);
             }
+
+            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+            UserManager userManager = new UserManager(new EfUserDal());
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+
+            Rental rentalAdd = new Rental
+            {
+                CarId = 1,
+                CustomerId = 1,
+                RentDate = DateTime.Now,
+                ReturnDate = new DateTime(2021, 03, 03)
+            };
+
+            Console.WriteLine(rentalManager.Add(rentalAdd).Message);
+
+            User user = new User
+            {   FirstName = "Ezgi",
+                LastName = "Akar",
+                Email = "ezgiakar.ea@gmail.com",
+                Password = "123456",
+                UserId = 1 
+            };
         }
     }
 }

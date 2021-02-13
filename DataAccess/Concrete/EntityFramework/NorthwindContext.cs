@@ -20,6 +20,11 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<Car> Cars { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Color> Colors { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Rental> Rentals { get; set; }
+
+    }
         //public DbSet<CarDetailDto> CarDetailDtoes { get; set; }
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -33,5 +38,5 @@ namespace DataAccess.Concrete.EntityFramework
         //    modelBuilder.Entity<CarDetailDto>().Property(p => p.ColorName).HasColumnName("ColorName");
         //    modelBuilder.Entity<CarDetailDto>().Property(p => p.DailyPrice).HasColumnName("CarDailyPrice");
         //}
-    }
+
 }

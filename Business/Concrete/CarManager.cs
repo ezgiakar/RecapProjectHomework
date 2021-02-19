@@ -1,9 +1,12 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entity.Concrete;
 using Entity.DTOes;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -21,18 +24,25 @@ namespace Business.Concrete
 
         public IResult Add(Car car)
         {
-            if (car.CarDailyPrice > 0)
-            {
-                return new ErrorResult(Messages.ProductNameInvalid);
-            }
-            _carDal.Add(car);
+            //if (car.CarDailyPrice > 0)
+            //{
+            //    return new ErrorResult(Messages.ProductNameInvalid);
+            //}
+            //_carDal.Add(car);
 
-            return new SuccessResult(Messages.ProductAdded);
+            //return new SuccessResult(Messages.ProductAdded);
 
-            if (car.CarDescription.Length < 2)
-            {
-                return new ErrorResult(Messages.ProductNameInvalid);
-            }
+            //if (car.CarDescription.Length < 2)
+            //{
+            //    return new ErrorResult(Messages.ProductNameInvalid);
+            //} Bunun yerine validator yazdık. Core katmanına yazdık.
+            
+
+
+            ValidationTool.Validate(new CarValidator(), car);
+
+            //business codes
+
             _carDal.Add(car);
 
             return new SuccessResult(Messages.ProductAdded);
